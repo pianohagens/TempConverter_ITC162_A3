@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.piano.tempconverter_itc162_a3.MainActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/temp_converter"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/faTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/faTextView"
+        android:layout_width="100dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/fahrenheit"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/ceTextView"
+        app:layout_constraintEnd_toStartOf="@+id/inputNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="Fahrenheit" />
+
+    <TextView
+        android:id="@+id/ceTextView"
+        android:layout_width="100dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/celsius"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/convert"
+        app:layout_constraintEnd_toStartOf="@+id/displyResult"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/faTextView"
+        tools:text="Celsius" />
+
+    <TextView
+        android:id="@+id/displyResult"
+        android:layout_width="204dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ceTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ceTextView" />
+
+    <EditText
+        android:id="@+id/inputNumber"
+        android:layout_width="204dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/enter_a_number"
+        android:inputType="numberDecimal"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/faTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/faTextView"
+        app:layout_constraintTop_toTopOf="@+id/faTextView" />
+
+</android.support.constraint.ConstraintLayout>

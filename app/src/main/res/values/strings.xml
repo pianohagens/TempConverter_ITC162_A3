@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Temp Converter_ITC162_A3</string>
+    <string name="temp_converter">Temp Converter</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="celsius">Celsius</string>
+    <string name="enter_a_number">Enter a Number</string>
+    <string name="conver">Conver</string>
+</resources>
