@@ -1,50 +1,132 @@
 package com.example.piano.tempconverter_itc162_a3;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-    TextView faTextView;
-    TextView ceTextView;
-    TextView displyResult;
-    EditText inputNumber;
-    Button convert;
+import java.text.NumberFormat;
+
+public class MainActivity extends AppCompatActivity
+        implements TextView.OnEditorActionListener, View.OnClickListener {
+
+    //define variable for the widgets
+    private EditText inputNumber;
+    private Button adding;
+    private Button decreasing;
+    private TextView faTextView;
+    private TextView ceTextView;
+    private TextView displyResult;
+
+
+    // define the Shared Preferences object
+    private SharedPreferences saveinput;
+
+    // define instance variables that should keep
+    private String inputString = "";
+    private float converDegree = .01f;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceInputValue) {
+        super.onCreate(savedInstanceInputValue);
         setContentView(R.layout.activity_main);
+
+        // get reference to the widgets
+        inputNumber = (EditText) findViewById(R.id.inputNumber);
+        adding = (Button) findViewById(R.id.adding);
+        decreasing = (Button) findViewById(R.id.decreasing);
+        faTextView = (TextView) findViewById(R.id.faTextView);
+        ceTextView = (TextView) findViewById(R.id.ceTextView);
+        displyResult = (TextView) findViewById(R.id.displyResult);
+
+        //set the listeners
+        inputNumber.setOnEditorActionListener(this);
+        adding.setOnClickListener(this);
+        decreasing.setOnClickListener(this);
+
+        //get shareprefeences object
+        saveinput = getSharedPreferences("saveinput", MODE_PRIVATE);
+
     }
-    public void add(View v)
-    {
-        ceTextView =(TextView)findViewById(R.id.ceTextView);
-        faTextView =(TextView)findViewById(R.id.faTextView);
-        displyResult=(TextView)findViewById(R.id.displyResult);
-        inputNumber=(EditText)findViewById(R.id.inputNumber);
+    @Override
+    public void onPause(){
+        //save the instance variables
+        SharedPreferences.Editor editor = saveinput.edit();
+        editor.putString("inputString", inputString);
+        editor.putFloat("converDegree", converDegree);
+        editor.commit();
 
-        //get value from edit text box and convert into double
-        double a=Double.parseDouble(String.valueOf(inputNumber.getText()));
+        super.onPause();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        //check which faTextView is checked
-        if(inputNumber.isChecked())
-        {
-            //display conversion
-            displyResult.setText(f2c(a)+" degree C");
-            //faTextView.setChecked(false);
-            inputNumber.setChecked(true);
+        //get the instance variables
+        inputString = saveinput.getString("inputString", "");
+        converDegree = saveinput.getFloat("converDegree", 0.01f);
+
+        //set the inputNumber on its widget
+        inputNumber.setText(inputString);
+
+        // calculate and display
+        converDegreeThenDisplay();
+
+    }
+
+    private void converDegreeThenDisplay() {
+        //get the inputNumber
+        inputString = inputNumber.getText().toString();
+        float degrees;
+        if (inputString.equals("")){
+            degrees = 0;
         }
+        else{
+            degrees = Float.parseFloat(inputString);
+        }
+
+        // f2c convert  + 32 )*5/9 formula
+        float f2c = (degrees-32)*5/9;
+
+        // display the result
+        NumberFormat num = NumberFormat.getNumberInstance();
+        displyResult.setText(num.format(f2c));
+
+        // addingAndDecreasing instance
+        NumberFormat addingNdecreasing = NumberFormat.getNumberInstance();
+        inputNumber.setText(addingNdecreasing.format(degrees));
     }
-    //Fahrenhiet to Celcius method
-    private double f2c(double faTextView)
-    {
-        return (faTextView-32)*5/9;
+
+    @Override
+    public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+        if (actionId == EditorInfo.IME_ACTION_DONE ||
+                actionId == EditorInfo.IME_ACTION_UNSPECIFIED){
+            converDegreeThenDisplay();
+        }
+        return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.adding:
+                converDegree = converDegree + 0.01f;
+                converDegreeThenDisplay();
+                break;
+
+            case R.id.decreasing:
+                converDegree = converDegree - 0.01f;
+                break;
+        }
+
     }
 }
 

@@ -1,75 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.piano.tempconverter_itc162_a3.MainActivity">
+    android:background="@android:color/holo_orange_dark"
+    tools:context="com.example.piano.tempconverter_itc162_a3.MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_marginTop="24dp"
         android:text="@string/temp_converter"
-        android:textColor="@color/colorAccent"
+        android:textColor="@android:color/holo_red_dark"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="24dp" />
+        app:layout_constraintBottom_toTopOf="@+id/faTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/adding"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="@string/adding"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/inputNumber"
+        app:layout_constraintEnd_toStartOf="@+id/decreasing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="+" />
+
+    <Button
+        android:id="@+id/decreasing"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="@string/decreasing"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/adding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/adding"
+        tools:text="-" />
 
     <TextView
         android:id="@+id/faTextView"
-        android:layout_width="108dp"
+        android:layout_width="104dp"
         android:layout_height="43dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="16dp"
         android:text="@string/fahrenheit"
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="75dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ceTextView"
+        app:layout_constraintEnd_toStartOf="@+id/inputNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/ceTextView"
-        android:layout_width="108dp"
+        android:layout_width="104dp"
         android:layout_height="43dp"
-        android:text="Celsius"
+        android:layout_marginBottom="259dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/celsius"
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="125dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/displyResult"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/faTextView" />
 
     <TextView
         android:id="@+id/displyResult"
-        android:layout_width="177dp"
+        android:layout_width="183dp"
         android:layout_height="43dp"
+        android:layout_marginBottom="259dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="183dp"
-        tools:layout_editor_absoluteY="125dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ceTextView"
+        app:layout_constraintTop_toBottomOf="@+id/inputNumber" />
 
     <EditText
         android:id="@+id/inputNumber"
-        android:layout_width="177dp"
+        android:layout_width="183dp"
         android:layout_height="43dp"
-        android:hint="Enter a Number"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/enter_a_number"
         android:inputType="numberDecimal"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="183dp"
-        tools:layout_editor_absoluteY="75dp" />
+        app:layout_constraintBottom_toTopOf="@+id/displyResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/faTextView"
+        app:layout_constraintTop_toBottomOf="@+id/adding" />
 
-    <Button
-        android:id="@+id/convert"
-        android:layout_width="336dp"
-        android:layout_height="46dp"
-        android:text="Conver"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="184dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,67 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_light"
     tools:context="com.example.piano.tempconverter_itc162_a3.MainActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="73dp">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/temp_converter"
         android:textColor="@color/colorAccent"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/faTextView"
+        app:layout_constraintBottom_toTopOf="@+id/adding"
+        app:layout_constraintStart_toStartOf="@+id/adding"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/adding"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="209dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="@string/adding"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/inputNumber"
+        app:layout_constraintEnd_toStartOf="@+id/decreasing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="+" />
+
+    <Button
+        android:id="@+id/decreasing"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="207dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="@string/decreasing"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/adding"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/adding"
+        app:layout_constraintTop_toTopOf="@+id/adding"
+        tools:text="-" />
+
+    <TextView
+        android:id="@+id/faTextView"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginStart="177dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/fahrenheit"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/inputNumber"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/faTextView"
-        android:layout_width="100dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:text="@string/fahrenheit"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/ceTextView"
-        app:layout_constraintEnd_toStartOf="@+id/inputNumber"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="Fahrenheit" />
-
-    <TextView
         android:id="@+id/ceTextView"
-        android:layout_width="100dp"
+        android:layout_width="104dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginBottom="62dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginStart="177dp"
         android:text="@string/celsius"
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/convert"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/displyResult"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/faTextView"
-        tools:text="Celsius" />
+        app:layout_constraintTop_toBottomOf="@+id/inputNumber" />
 
     <TextView
         android:id="@+id/displyResult"
-        android:layout_width="204dp"
+        android:layout_width="203dp"
         android:layout_height="43dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="85dp"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/ceTextView"
@@ -70,16 +101,17 @@
 
     <EditText
         android:id="@+id/inputNumber"
-        android:layout_width="204dp"
+        android:layout_width="203dp"
         android:layout_height="43dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/enter_a_number"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginTop="32dp"
+        android:hint="Enter a Number"
         android:inputType="numberDecimal"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/faTextView"
+        app:layout_constraintBottom_toTopOf="@+id/ceTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/faTextView"
-        app:layout_constraintTop_toTopOf="@+id/faTextView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/adding" />
 </android.support.constraint.ConstraintLayout>
