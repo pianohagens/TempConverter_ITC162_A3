@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
 
     // define instance variables that should keep
     private String inputString = "";
-    private float converDegree = .01f;
+    private float needToConvertDgree = .01f;
 
     @Override
     public void onCreate(Bundle savedInstanceInputValue) {
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         //save the instance variables
         SharedPreferences.Editor editor = saveinput.edit();
         editor.putString("inputString", inputString);
-        editor.putFloat("converDegree", converDegree);
+        editor.putFloat("needToConvertDgree", needToConvertDgree);
         editor.commit();
 
         super.onPause();
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity
 
         //get the instance variables
         inputString = saveinput.getString("inputString", "");
-        converDegree = saveinput.getFloat("converDegree", 0.01f);
+        needToConvertDgree = saveinput.getFloat("needToConvertDgree", 0.01f);
 
         //set the inputNumber on its widget
         inputNumber.setText(inputString);
@@ -85,24 +85,24 @@ public class MainActivity extends AppCompatActivity
     private void converDegreeThenDisplay() {
         //get the inputNumber
         inputString = inputNumber.getText().toString();
-        float degrees;
+        float turnInputNumberToFloat;
         if (inputString.equals("")){
-            degrees = 0;
+            turnInputNumberToFloat = 0;
         }
         else{
-            degrees = Float.parseFloat(inputString);
+            turnInputNumberToFloat = Float.parseFloat(inputString);
         }
 
         // f2c convert  + 32 )*5/9 formula
-        float f2c = (degrees-32)*5/9;
+        float f2c = (turnInputNumberToFloat-32)*5/9;
 
-        // display the result
-        NumberFormat num = NumberFormat.getNumberInstance();
-        displyResult.setText(num.format(f2c));
+        // display the result C
+        NumberFormat degreeC = NumberFormat.getNumberInstance();
+        displyResult.setText(degreeC.format(f2c)+ " \u00b0C");
 
-        // addingAndDecreasing instance
-        NumberFormat addingNdecreasing = NumberFormat.getNumberInstance();
-        inputNumber.setText(addingNdecreasing.format(degrees));
+        // display the instance input F
+        NumberFormat degreeF = NumberFormat.getNumberInstance();
+        inputNumber.setText(degreeF.format(needToConvertDgree)+ " \u00b0F");
     }
 
     @Override
@@ -118,12 +118,13 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.adding:
-                converDegree = converDegree + 0.01f;
+                needToConvertDgree = needToConvertDgree + 0.01f;
                 converDegreeThenDisplay();
                 break;
 
             case R.id.decreasing:
-                converDegree = converDegree - 0.01f;
+                needToConvertDgree = needToConvertDgree - 0.01f;
+                converDegreeThenDisplay();
                 break;
         }
 
