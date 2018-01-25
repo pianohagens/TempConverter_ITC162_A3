@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void converDegreeThenDisplay() {
-        //get the inputNumber
+        //get the inputNumber value
         inputString = inputNumber.getText().toString();
         float turnInputNumberToFloat;
         if (inputString.equals("")){
