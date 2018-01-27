@@ -4,7 +4,7 @@
     <string name="fahrenheit">Fahrenheit</string>
     <string name="celsius">Celsius</string>
     <string name="enter_a_number">Enter a Number</string>
-    <string name="conver">Conver</string>
+    <string name="conver">Convert</string>
     <string name="adding">+</string>
     <string name="decreasing">-</string>
 </resources>

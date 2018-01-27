@@ -16,72 +16,54 @@ import android.widget.TextView;
 import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity
-        implements TextView.OnEditorActionListener, View.OnClickListener {
+        implements TextView.OnEditorActionListener{
 
-    //define variable for the widgets
+    //define variable for the widgets-input
     private EditText inputNumber;
-    private Button adding;
-    private Button decreasing;
-    private TextView faTextView;
-    private TextView ceTextView;
+    private Button clearButton;
+    //define variable for the widgets-output
     private TextView displyResult;
 
-
     // define the Shared Preferences object
-    private SharedPreferences saveinput;
+    private SharedPreferences saveInput;
 
     // define instance variables that should keep
     private String inputString = "";
-    private float needToConvertDgree = .01f;
 
     @Override
     public void onCreate(Bundle savedInstanceInputValue) {
         super.onCreate(savedInstanceInputValue);
         setContentView(R.layout.activity_main);
 
-        // get reference to the widgets
+        // get reference to the widgets - input
         inputNumber = (EditText) findViewById(R.id.inputNumber);
-        adding = (Button) findViewById(R.id.adding);
-        decreasing = (Button) findViewById(R.id.decreasing);
-        faTextView = (TextView) findViewById(R.id.faTextView);
-        ceTextView = (TextView) findViewById(R.id.ceTextView);
+        clearButton = (Button)findViewById(R.id.clearButton);
+        // get reference to the widgets-ouput
         displyResult = (TextView) findViewById(R.id.displyResult);
 
         //set the listeners
         inputNumber.setOnEditorActionListener(this);
-        adding.setOnClickListener(this);
-        decreasing.setOnClickListener(this);
-
         //get shareprefeences object
-        saveinput = getSharedPreferences("saveinput", MODE_PRIVATE);
-
+        saveInput = getSharedPreferences("saveInput", MODE_PRIVATE);
     }
     @Override
     public void onPause(){
-        //save the instance variables
-        SharedPreferences.Editor editor = saveinput.edit();
-        editor.putString("inputString", inputString);
-        editor.putFloat("needToConvertDgree", needToConvertDgree);
-        editor.commit();
-
         super.onPause();
+        //save the instance variables
+        SharedPreferences.Editor editor = saveInput.edit();
+        editor.putString("inputString", inputString);
+        editor.commit();
     }
     @Override
-    public void onResume() {
+    public void onResume(){
         super.onResume();
-
-        //get the instance variables
-        inputString = saveinput.getString("inputString", "");
-        needToConvertDgree = saveinput.getFloat("needToConvertDgree", 0.01f);
-
-        //set the inputNumber on its widget
+        //get instance values
+        inputString = saveInput.getString("inputString", "");
         inputNumber.setText(inputString);
-
-        // calculate and display
+        // to converDegreeThenDisplay
         converDegreeThenDisplay();
 
     }
-
     private void converDegreeThenDisplay() {
         //get the inputNumber value
         inputString = inputNumber.getText().toString();
@@ -92,8 +74,7 @@ public class MainActivity extends AppCompatActivity
         else{
             turnInputNumberToFloat = Float.parseFloat(inputString);
         }
-
-        // f2c convert  + 32 )*5/9 formula
+        // f2c convert into formula  (f-32)*5/9
         float f2c = (turnInputNumberToFloat-32)*5/9;
 
         // display the result C
@@ -102,7 +83,7 @@ public class MainActivity extends AppCompatActivity
 
         // display the instance input F
         NumberFormat degreeF = NumberFormat.getNumberInstance();
-        inputNumber.setText(degreeF.format(needToConvertDgree)+ " \u00b0F");
+        inputNumber.setText(degreeF.format(turnInputNumberToFloat)+ " \u00b0F");
     }
 
     @Override
@@ -113,21 +94,10 @@ public class MainActivity extends AppCompatActivity
         }
         return false;
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.adding:
-                needToConvertDgree = needToConvertDgree + 0.01f;
-                converDegreeThenDisplay();
-                break;
-
-            case R.id.decreasing:
-                needToConvertDgree = needToConvertDgree - 0.01f;
-                converDegreeThenDisplay();
-                break;
-        }
-
+    //for the clear button
+    public void Clear(View clear){
+        inputNumber.setText("");
+        displyResult.setText("");
     }
 }
 
